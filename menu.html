@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hand Cricket Menu</title>
+    <style>
+        body { background-color: #0f172a; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 20px; }
+        h1 { font-size: 3rem; margin-top: 50px; color: #38bdf8; }
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 50px; }
+        .box { width: 250px; height: 200px; border: 2px solid #38bdf8; border-radius: 15px; 
+               display: flex; flex-direction: column; align-items: center; justify-content: center; 
+               cursor: pointer; transition: transform 0.3s; background: #1e293b; }
+        .box:hover { transform: scale(1.05); background: #38bdf8; color: #0f172a; }
+        .label { font-weight: bold; margin-top: 10px; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+    <h1>HAND CRICKET</h1>
+    <p>Select your game mode:</p>
+
+    <div class="container">
+        <div class="box" onclick="location.href='game.html'">
+            <div class="label">AI BOT</div>
+        </div>
+        <div class="box">
+            <div class="label">FRIENDS</div>
+        </div>
+        <div class="box">
+            <div class="label">MULTIPLAYER</div>
+        </div>
+        <div class="box">
+            <div class="label">RANDOM PLAYERS</div>
+        </div>
+    </div>
+
+    <div style="height: 500px;"></div> 
+
+</body>
+</html>
