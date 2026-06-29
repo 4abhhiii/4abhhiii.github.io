@@ -31,10 +31,14 @@
         const provider = new firebase.auth.GoogleAuthProvider();
         document.getElementById('loginBtn').addEventListener('click', () => {
             firebase.auth().signInWithPopup(provider).then((result) => {
-                // ലോഗിൻ സക്സസ് ആയാൽ നേരെ nickname.html-ലേക്ക് വിടുന്നു
-                window.location.href = 'nickname.html'; 
+                const user = result.user;
+                // യൂസർനെയിം സേവ് ചെയ്യുന്നു
+                localStorage.setItem('username', user.displayName);
+                // റീഡയറക്റ്റ് ചെയ്യുന്നു
+                window.location.replace('nickname.html');
             }).catch((error) => {
-                alert("Error: " + error.message);
+                console.error("Login Error: ", error);
+                alert("Login Error: " + error.message);
             });
         });
     </script>
