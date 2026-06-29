@@ -3,53 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Hand Cricket</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    
     <style>
-        body { 
-            background-color: #0f172a; 
-            color: white; 
-            font-family: sans-serif; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-        }
-        .login-box { 
-            text-align: center; 
-            padding: 40px; 
-            border: 2px solid #38bdf8; 
-            border-radius: 20px; 
-            background: #1e293b; 
-        }
+        body { background-color: #0f172a; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-box { text-align: center; padding: 40px; border: 2px solid #38bdf8; border-radius: 20px; background: #1e293b; }
         h1 { color: #38bdf8; margin-bottom: 20px; }
-        button { 
-            padding: 15px 30px; 
-            background: #38bdf8; 
-            border: none; 
-            border-radius: 10px; 
-            color: #0f172a; 
-            font-weight: bold; 
-            font-size: 18px; 
-            cursor: pointer; 
-            transition: 0.3s;
-        }
-        button:hover { background: #bae6fd; transform: scale(1.05); }
+        button { padding: 15px 30px; background: #38bdf8; border: none; border-radius: 10px; color: #0f172a; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div class="login-box">
-        <h1>Welcome</h1>
-        <p>Login to start your game</p>
-        <button onclick="handleLogin()">Login with Google</button>
+        <h1>Hand Cricket</h1>
+        <button id="loginBtn">Login with Google</button>
     </div>
 
     <script>
-        function handleLogin() {
-            // ലോഗിൻ പ്രോസസ് ഇവിടെ നടക്കും. 
-            // ലോഗിൻ കഴിഞ്ഞാൽ ഉടനെ മെനുവിലേക്ക് പോകും.
-            window.location.href = 'menu.html';
-        }
+        // നിന്റെ ഫയർബേസ് കോൺഫിഗറേഷൻ ഇവിടെ വരണം
+        const firebaseConfig = {
+            // ഇവിടെ നിന്റെ firebase config code കൊടുത്തോളൂ
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        const provider = new firebase.auth.GoogleAuthProvider();
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            firebase.auth().signInWithPopup(provider).then((result) => {
+                // ലോഗിൻ സക്സസ് ആയാൽ മെനുവിലേക്ക് പോകുന്നു
+                window.location.href = 'menu.html';
+            }).catch((error) => {
+                alert("Login Failed: " + error.message);
+            });
+        });
     </script>
 
 </body>
