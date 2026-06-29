@@ -6,8 +6,8 @@
     <style>
         body { background-color: #0f172a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
         .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 600px; margin: 50px auto; }
-        .box { 
-            padding: 30px; border: 2px solid #38bdf8; border-radius: 15px; 
+        .box {
+            padding: 30px; border: 2px solid #38bdf8; border-radius: 15px;
             background: #1e293b; cursor: pointer; transition: 0.3s;
         }
         .box:hover { transform: scale(1.05); background: #334155; }
@@ -15,7 +15,9 @@
     </style>
 </head>
 <body>
-    <h1>HAND CRICKET</h1>
+    <h1>WELCOME, <span id="displayNickname"></span>!</h1>
+    <h2>HAND CRICKET</h2>
+    
     <div class="grid-container">
         <div class="box" onclick="window.location.href='toss.html'">
             <div class="label">AI BOT</div>
@@ -30,5 +32,11 @@
             <div class="label">RANDOM PLAYERS</div>
         </div>
     </div>
+
+    <script>
+        // nickname.html-ൽ നിന്ന് സേവ് ചെയ്ത പേര് ഇവിടെ കാണിക്കുന്നു
+        const savedName = localStorage.getItem('username') || "Player";
+        document.getElementById('displayNickname').innerText = savedName;
+    </script>
 </body>
 </html>

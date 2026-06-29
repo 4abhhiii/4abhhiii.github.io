@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Set Nickname - Hand Cricket</title>
+    <style>
+        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { text-align: center; padding: 40px; border: 2px solid #38bdf8; border-radius: 20px; background: #1e293b; }
+        input { padding: 10px; border-radius: 5px; border: none; margin-bottom: 20px; width: 200px; }
+        button { padding: 10px 20px; background: #38bdf8; border: none; border-radius: 10px; color: #0f172a; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Enter Your Nickname</h1>
+        <input type="text" id="nickInput" placeholder="Enter nickname...">
+        <br>
+        <button onclick="saveAndProceed()">Save & Continue</button>
+    </div>
+
+    <script>
+        function saveAndProceed() {
+            const nick = document.getElementById('nickInput').value;
+            if(nick.trim() !== "") {
+                localStorage.setItem('username', nick); // പേര് സേവ് ചെയ്യുന്നു
+                window.location.href = 'menu.html'; // നേരെ മെനുവിലേക്ക്
+            } else {
+                alert("Please enter a name!");
+            }
+        }
+    </script>
+</body>
+</html>
