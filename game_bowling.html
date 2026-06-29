@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hand Cricket - Bowling</title>
+    <style>
+        body { background: #0f172a; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 20px; }
+        
+        /* ആനിമേഷൻ - ബൗളിംഗ് സ്പെസിഫിക് */
+        #intro-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(15, 23, 42, 0.95); display: flex; align-items: center; justify-content: center; z-index: 10; animation: fadeOut 3s forwards; backdrop-filter: blur(5px); }
+        #message { font-size: 2rem; color: #f87171; animation: slideUp 2s ease-out; }
+        @keyframes slideUp { 0% { transform: translateY(100px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeOut { 0% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+
+        h1 { color: #f87171; margin-bottom: 20px; }
+        .score-container { display: flex; justify-content: center; align-items: center; gap: 30px; margin: 20px 0; }
+        .box { width: 100px; height: 100px; border: 2px solid #f87171; border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.2rem; background: #1e293b; }
+        .score-display { background: #1e293b; padding: 20px; border-radius: 15px; border: 2px solid #f87171; margin: 20px auto; max-width: 300px; }
+        
+        .num-pad { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; max-width: 600px; margin: 20px auto; }
+        .num-btn { padding: 20px; background: #1e293b; border: 1px solid #f87171; color: white; cursor: pointer; border-radius: 10px; font-size: 1.2rem; }
+        .num-btn:hover { background: #f87171; color: #0f172a; }
+    </style>
+</head>
+<body>
+
+    <div id="intro-overlay"><div id="message">GOOD LUCK! BOWLING TIME</div></div>
+
+    <h1>Are You Challenging Me</h1>
+    
+    <div class="score-container">
+        <div class="box">AI BOT<div id="aiScore" style="font-size: 2rem;">?</div></div>
+        <div style="color: #38bdf8; font-weight: bold;">Time<br>30sec</div>
+        <div class="box">YOU<div id="userScore" style="font-size: 2rem;">?</div></div>
+    </div>
+
+    <div class="score-display">
+        <div style="font-size: 0.9rem; color: #94a3b8;">AI TOTAL SCORE</div>
+        <div id="aiTotalScore" style="font-size: 3rem; color: #f87171;">0</div>
+    </div>
+
+    <div class="num-pad">
+        <script>
+            for(let i=0; i<=10; i++) {
+                document.write(`<button class="num-btn" onclick="play(${i})">${i}</button>`);
+            }
+        </script>
+    </div>
+
+    <script>
+        let aiTotal = 0;
+        function play(n) {
+            let comp = Math.floor(Math.random() * 11);
+            document.getElementById('userScore').innerText = n;
+            document.getElementById('aiScore').innerText = comp;
+            
+            // ബൗളിംഗ് റൂൾ
+            if (n === comp) {
+                alert("WICKET! AI is OUT! Final AI Score: " + aiTotal);
+                aiTotal = 0;
+            } else {
+                if (comp === 0) {
+                    aiTotal += n; // എഐ 0 അമർത്തിയാൽ നീ അമർത്തിയ നമ്പർ എഐക്ക് കിട്ടും
+                } else {
+                    aiTotal += comp; // അല്ലാത്തപ്പോൾ എഐയുടെ നമ്പർ തന്നെ
+                }
+            }
+            document.getElementById('aiTotalScore').innerText = aiTotal;
+        }
+    </script>
+</body>
+</html>
