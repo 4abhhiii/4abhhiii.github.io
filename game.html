@@ -4,20 +4,15 @@
     <title>Hand Cricket Game</title>
     <style>
         body { text-align: center; font-family: sans-serif; background: #0f172a; color: white; padding-top: 50px; }
-        .box { border: 2px solid #38bdf8; padding: 20px; border-radius: 10px; display: inline-block; width: 300px; margin: 10px; }
+        .box { border: 2px solid #38bdf8; padding: 30px; border-radius: 15px; display: inline-block; width: 300px; }
         input { padding: 10px; width: 80px; border-radius: 5px; border: none; margin: 10px; }
         button { padding: 10px 20px; background: #38bdf8; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="box">
-        <h1>Hand Cricket</h1>
-        <button onclick="alert('Google Login setup pending!')">Login with Google to Play</button>
-    </div>
-
-    <div class="box">
-        <h3>Quick Play (No Login)</h3>
-        <input type="number" id="userVal" placeholder="0-6" min="0" max="6">
+        <h1>Batting Time!</h1>
+        <input type="number" id="userVal" placeholder="0-10" min="0" max="10">
         <button onclick="play()">Bat</button>
         <h2 id="result">Score: 0</h2>
     </div>
@@ -26,19 +21,17 @@
         let score = 0;
         function play() {
             let user = parseInt(document.getElementById("userVal").value);
-            let comp = Math.floor(Math.random() * 7);
-            
-            if (user < 0 || user > 6 || isNaN(user)) {
-                alert("Please enter a number between 0 and 6");
+            let comp = Math.floor(Math.random() * 11);
+            if (user < 0 || user > 10 || isNaN(user)) {
+                alert("Enter 0-10");
                 return;
             }
-
             if (user === comp) {
-                document.getElementById("result").innerText = "Out! Final Score: " + score;
+                document.getElementById("result").innerText = "Out! Final: " + score;
                 score = 0;
             } else {
                 score += user;
-                document.getElementById("result").innerText = "Comp chose " + comp + ". Score: " + score;
+                document.getElementById("result").innerText = "Comp: " + comp + " | Score: " + score;
             }
         }
     </script>
