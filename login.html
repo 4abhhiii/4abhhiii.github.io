@@ -36,14 +36,20 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // റീഡയറക്ട് റിസൾട്ട് ചെക്ക് ചെയ്യുന്നു
+        // ലോഗിൻ റിസൾട്ട് ചെക്ക് ചെയ്യുന്നു
         getRedirectResult(auth).then((result) => {
             if (result) {
                 localStorage.setItem('username', result.user.displayName);
-                window.location.replace('nickname.html');
+                window.location.href = 'nickname.html';
+            } else {
+                // ഓൾറെഡി ലോഗിൻ ആണെങ്കിൽ നേരെ നിക്ക് നെയിമിലേക്ക്
+                const user = auth.currentUser;
+                if (user) {
+                    window.location.href = 'nickname.html';
+                }
             }
         }).catch((error) => {
-            console.error(error);
+            console.error("Auth Error:", error);
         });
 
         document.getElementById('loginBtn').addEventListener('click', () => {
