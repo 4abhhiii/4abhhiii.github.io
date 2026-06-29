@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Toss - Hand Cricket</title>
+    <style>
+        body { background: #0f172a; color: white; text-align: center; font-family: sans-serif; padding-top: 100px; }
+        h1 { color: #38bdf8; }
+        .toss-btn { 
+            padding: 20px 40px; margin: 20px; border: 2px solid #38bdf8; 
+            border-radius: 15px; cursor: pointer; background: #1e293b; color: white;
+            transition: transform 0.2s; font-size: 1.5rem; width: 200px;
+        }
+        .toss-btn:active { transform: translateY(-10px); background: #38bdf8; color: #0f172a; }
+    </style>
+</head>
+<body>
+    <h1>AI BOT</h1>
+    <h3>Choose Odd or Even</h3>
+    <button class="toss-btn" onclick="selectToss('odd')">ODD</button>
+    <button class="toss-btn" onclick="selectToss('even')">EVEN</button>
+
+    <script>
+        function selectToss(choice) {
+            let userNum = Math.floor(Math.random() * 6);
+            let botNum = Math.floor(Math.random() * 11);
+            let result = ((userNum + botNum) % 2 === 0) ? "even" : "odd";
+
+            if (result === choice) {
+                localStorage.setItem('tossWinner', 'user');
+            } else {
+                localStorage.setItem('tossWinner', 'bot');
+            }
+            window.location.href = 'toss_result.html';
+        }
+    </script>
+</body>
+</html>

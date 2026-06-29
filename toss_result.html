@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Toss Result</title>
+    <style>
+        body { background: #0f172a; color: white; text-align: center; font-family: sans-serif; padding-top: 100px; }
+        .choice-btn { 
+            padding: 20px 40px; margin: 20px; border: 2px solid #38bdf8; 
+            border-radius: 15px; cursor: pointer; background: #1e293b; color: white;
+            transition: transform 0.2s; font-size: 1.5rem; width: 250px;
+        }
+        .choice-btn:active { transform: translateY(-10px); background: #38bdf8; color: #0f172a; }
+    </style>
+</head>
+<body onload="checkWinner()">
+    <h1 id="msg">Processing...</h1>
+    <div id="choices" style="display:none;">
+        <button class="choice-btn" onclick="location.href='game.html'">BATTING</button>
+        <button class="choice-btn" onclick="location.href='game.html'">BOWLING</button>
+    </div>
+
+    <script>
+        function checkWinner() {
+            let winner = localStorage.getItem('tossWinner');
+            if (winner === 'user') {
+                document.getElementById('msg').innerText = "You Won the Toss!";
+                document.getElementById('choices').style.display = "block";
+            } else {
+                document.getElementById('msg').innerText = "AI Won! It chose to Bat.";
+                setTimeout(() => { window.location.href = 'game.html'; }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
+
