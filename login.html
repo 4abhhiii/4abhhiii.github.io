@@ -1,26 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Hand Cricket</title>
-    <style>
-        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-box { text-align: center; padding: 40px; border: 2px solid #38bdf8; border-radius: 20px; background: #1e293b; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        h1 { margin-bottom: 20px; color: #38bdf8; }
-        button { padding: 15px 30px; background: #38bdf8; border: none; border-radius: 10px; color: #0f172a; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #7dd3fc; }
-    </style>
-</head>
-<body>
-    <div class="login-box">
-        <h1>Hand Cricket</h1>
-        <button id="loginBtn">Sign in with Google</button>
-    </div>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getAuth, signInWithRedirect, GoogleAuthProvider, getRedirectResult } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAwU8tbkZ-HPXkAtE8dwARTQ1O6rzlpCZ0",
@@ -35,20 +20,29 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // റീഡയറക്ട് റിസൾട്ട് ചെക്ക് ചെയ്യുന്നു
-        getRedirectResult(auth).then((result) => {
-            if (result) {
-                // ലോഗിൻ സക്സസ് ആയാൽ nickname പേജിലേക്ക് പോകുന്നു
-                window.location.href = 'nickname.html';
-            }
-        }).catch((error) => {
-            console.error("Auth Error:", error);
-            alert("Login Failed: " + error.message);
-        });
-
         document.getElementById('loginBtn').addEventListener('click', () => {
-            signInWithRedirect(auth, provider);
+            signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                localStorage.setItem('username', user.displayName);
+                window.location.replace('nickname.html');
+            })
+            .catch((error) => {
+                alert("Login Error: " + error.message);
+                console.error(error);
+            });
         });
     </script>
+    <style>
+        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-box { text-align: center; padding: 40px; border: 2px solid #38bdf8; border-radius: 20px; background: #1e293b; }
+        button { padding: 15px 30px; background: #38bdf8; border: none; border-radius: 10px; color: #0f172a; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>Hand Cricket</h1>
+        <button id="loginBtn">Login with Google</button>
+    </div>
 </body>
 </html>
