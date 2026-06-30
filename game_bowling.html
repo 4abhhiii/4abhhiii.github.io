@@ -45,16 +45,20 @@
 
             if (n === comp) {
                 if (savedTarget && savedTarget !== "0") {
-                    // രണ്ടാമത്തെ ഇന്നിംഗ്സ് - ബൗളിംഗ് കഴിഞ്ഞ് ഗെയിം ഓവർ
                     showGameOver(aiTotal < savedTarget ? "YOU WON!" : "YOU LOST!");
                 } else {
-                    // ഒന്നാമത്തെ ഇന്നിംഗ്സ് - ടാർഗറ്റ് സെറ്റ് ചെയ്ത് ബാറ്റിംഗിലേക്ക്
                     localStorage.setItem('targetScore', aiTotal);
                     window.location.href = 'game_batting.html';
                 }
             } else {
-                aiTotal += comp;
+                // ലോജിക്: ബോളർ 0 ഇട്ടാൽ ബാറ്റ്സ്മാന്റെ സ്കോർ, ബാറ്റ്സ്മാൻ 0 ഇട്ടാൽ ബോളറുടെ സ്കോർ
+                let run = comp;
+                if (comp === 0) run = n; 
+                else if (n === 0) run = comp;
+                
+                aiTotal += run;
                 document.getElementById('aiTotalScore').innerText = aiTotal;
+                
                 if (savedTarget && aiTotal > savedTarget) {
                     showGameOver("YOU LOST!");
                 }

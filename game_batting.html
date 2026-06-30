@@ -45,15 +45,15 @@
 
             if (n === comp) {
                 if (savedTarget && savedTarget !== "0") {
-                    // രണ്ടാമത്തെ ഇന്നിംഗ്സ് - ബാറ്റിംഗ് കഴിഞ്ഞ് ഗെയിം ഓവർ
                     showGameOver(userTotal > savedTarget ? "YOU WON!" : "YOU LOST!");
                 } else {
-                    // ഒന്നാമത്തെ ഇന്നിംഗ്സ് - ടാർഗറ്റ് സെറ്റ് ചെയ്ത് ബോളിംഗിലേക്ക്
                     localStorage.setItem('targetScore', userTotal);
                     window.location.href = 'game_bowling.html';
                 }
             } else {
-                userTotal += n;
+                // ലോജിക്: ബാറ്റ്സ്മാൻ 0 ഇട്ടാൽ ബോളറുടെ സ്കോർ കിട്ടുന്നു
+                let run = (n === 0) ? comp : n;
+                userTotal += run;
                 document.getElementById('userTotalScore').innerText = userTotal;
                 if (savedTarget && userTotal > savedTarget) {
                     showGameOver("YOU WON!");
