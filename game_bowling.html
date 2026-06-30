@@ -5,7 +5,9 @@
     <title>Hand Cricket - Bowling</title>
     <style>
         body { background: #0f172a; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 20px; }
-        #splash-screen { position: fixed; top:0; left:0; width:100%; height:100%; background: #0f172a; display: none; align-items: center; justify-content: center; z-index: 20; font-size: 3rem; font-weight: bold; }
+        #game-over-screen { position: fixed; top:0; left:0; width:100%; height:100%; background: #0f172a; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 100; }
+        .letter { display: inline-block; font-size: 4rem; font-weight: bold; animation: popIn 0.5s ease-out forwards; opacity: 0; }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         .score-container { display: flex; justify-content: center; gap: 30px; margin: 20px 0; }
         .box { width: 100px; height: 100px; border: 2px solid #f87171; border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.2rem; background: #1e293b; }
         .num-pad { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; max-width: 600px; margin: 20px auto; }
@@ -13,7 +15,7 @@
     </style>
 </head>
 <body>
-    <div id="splash-screen"></div>
+    <div id="game-over-screen"></div>
     <h1>Bowling Time!</h1>
     <div class="score-container">
         <div class="box">AI BOT<div id="aiScore">?</div></div>
@@ -43,29 +45,40 @@
 
             if (n === comp) {
                 if (savedTarget && savedTarget !== "0") {
-                    if (aiTotal >= savedTarget) { showSplash("YOU LOST!"); } 
-                    else { showSplash("YOU WON!"); }
-                    localStorage.removeItem('targetScore');
-                    setTimeout(() => window.location.href = 'menu.html', 1500);
+                    // രണ്ടാമത്തെ ഇന്നിംഗ്സ് - ബൗളിംഗ് കഴിഞ്ഞ് ഗെയിം ഓവർ
+                    showGameOver(aiTotal < savedTarget ? "YOU WON!" : "YOU LOST!");
                 } else {
+                    // ഒന്നാമത്തെ ഇന്നിംഗ്സ് - ടാർഗറ്റ് സെറ്റ് ചെയ്ത് ബാറ്റിംഗിലേക്ക്
                     localStorage.setItem('targetScore', aiTotal);
-                    showSplash("Target Set: " + aiTotal);
-                    setTimeout(() => window.location.href = 'game_batting.html', 1500);
+                    window.location.href = 'game_batting.html';
                 }
             } else {
                 aiTotal += comp;
                 document.getElementById('aiTotalScore').innerText = aiTotal;
                 if (savedTarget && aiTotal > savedTarget) {
-                    showSplash("YOU LOST!");
-                    localStorage.removeItem('targetScore');
-                    setTimeout(() => window.location.href = 'menu.html', 1500);
+                    showGameOver("YOU LOST!");
                 }
             }
         }
-        function showSplash(text) {
-            const s = document.getElementById('splash-screen');
-            s.innerText = text; s.style.display = 'flex';
-            setTimeout(() => { s.style.display = 'none'; }, 1500);
+
+        function showGameOver(text) {
+            const screen = document.getElementById('game-over-screen');
+            screen.style.display = 'flex';
+            const msg = "GAME OVER";
+            msg.split('').forEach((char, i) => {
+                setTimeout(() => {
+                    const span = document.createElement('span');
+                    span.className = 'letter';
+                    span.innerText = char;
+                    screen.appendChild(span);
+                }, i * 300);
+            });
+            setTimeout(() => {
+                const h2 = document.createElement('h2');
+                h2.innerText = text;
+                screen.appendChild(h2);
+            }, 3000);
+            setTimeout(() => { localStorage.removeItem('targetScore'); window.location.href = 'menu.html'; }, 4500);
         }
     </script>
 </body>
