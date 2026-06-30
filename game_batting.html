@@ -25,8 +25,8 @@
 
     <script>
         let userTotal = 0;
-        const savedTarget = localStorage.getItem('targetScore') || 0;
-        document.getElementById('targetDisplay').innerText = savedTarget;
+        const savedTarget = localStorage.getItem('targetScore');
+        document.getElementById('targetDisplay').innerText = (savedTarget && savedTarget !== "0") ? savedTarget : "---";
 
         const container = document.getElementById('buttonsContainer');
         for(let i=0; i<=10; i++) {
@@ -42,27 +42,26 @@
             document.getElementById('aiScore').innerText = comp;
 
             if (n === comp) {
-                // ഔട്ട് ആകുമ്പോൾ വിജയിയെ തീരുമാനിക്കുന്നു
-                if (userTotal > savedTarget) {
-                    showSplash("YOU WON!");
+                if (savedTarget && savedTarget !== "0") {
+                    if (userTotal > savedTarget) { showSplash("YOU WON!"); } 
+                    else { showSplash("YOU LOST!"); }
+                    localStorage.removeItem('targetScore');
+                    setTimeout(() => window.location.href = 'menu.html', 1500);
                 } else {
-                    showSplash("YOU LOST!");
+                    localStorage.setItem('targetScore', userTotal);
+                    showSplash("Target Set: " + userTotal);
+                    setTimeout(() => window.location.href = 'game_bowling.html', 1500);
                 }
-                localStorage.removeItem('targetScore'); // ഡാറ്റ ക്ലിയർ ചെയ്യുന്നു
-                setTimeout(() => window.location.href = 'menu.html', 1500);
             } else {
                 userTotal += n;
                 document.getElementById('userTotalScore').innerText = userTotal;
-                
-                // ടാർഗറ്റ് മറികടന്നാൽ ജയിച്ചു
-                if (userTotal > savedTarget) {
+                if (savedTarget && userTotal > savedTarget) {
                     showSplash("YOU WON!");
                     localStorage.removeItem('targetScore');
                     setTimeout(() => window.location.href = 'menu.html', 1500);
                 }
             }
         }
-
         function showSplash(text) {
             const s = document.getElementById('splash-screen');
             s.innerText = text; s.style.display = 'flex';

@@ -25,8 +25,10 @@
 
     <script>
         let aiTotal = 0;
+        const savedTarget = localStorage.getItem('targetScore');
+        document.getElementById('targetDisplay').innerText = (savedTarget && savedTarget !== "0") ? savedTarget : "---";
+
         const container = document.getElementById('buttonsContainer');
-        
         for(let i=0; i<=10; i++) {
             let btn = document.createElement('button');
             btn.className = 'num-btn'; btn.innerText = i;
@@ -40,15 +42,26 @@
             document.getElementById('aiScore').innerText = comp;
 
             if (n === comp) {
-                showSplash("OUT!");
-                localStorage.setItem('targetScore', aiTotal);
-                setTimeout(() => window.location.href = 'game_batting.html', 1500);
+                if (savedTarget && savedTarget !== "0") {
+                    if (aiTotal >= savedTarget) { showSplash("YOU LOST!"); } 
+                    else { showSplash("YOU WON!"); }
+                    localStorage.removeItem('targetScore');
+                    setTimeout(() => window.location.href = 'menu.html', 1500);
+                } else {
+                    localStorage.setItem('targetScore', aiTotal);
+                    showSplash("Target Set: " + aiTotal);
+                    setTimeout(() => window.location.href = 'game_batting.html', 1500);
+                }
             } else {
                 aiTotal += comp;
                 document.getElementById('aiTotalScore').innerText = aiTotal;
+                if (savedTarget && aiTotal > savedTarget) {
+                    showSplash("YOU LOST!");
+                    localStorage.removeItem('targetScore');
+                    setTimeout(() => window.location.href = 'menu.html', 1500);
+                }
             }
         }
-
         function showSplash(text) {
             const s = document.getElementById('splash-screen');
             s.innerText = text; s.style.display = 'flex';
