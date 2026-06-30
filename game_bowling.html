@@ -5,61 +5,32 @@
     <title>Hand Cricket - Bowling</title>
     <style>
         body { background: #0f172a; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 20px; }
-        
-        /* ആനിമേഷൻ സ്റ്റൈലുകൾ */
         #splash-screen { position: fixed; top:0; left:0; width:100%; height:100%; background: #0f172a; display: none; align-items: center; justify-content: center; z-index: 20; font-size: 3rem; font-weight: bold; }
-        .splash-anim { animation: splashEffect 1.5s ease-out; }
-        @keyframes splashEffect { 0% { transform: scale(0.5); opacity: 0; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }
-
         .score-container { display: flex; justify-content: center; gap: 30px; margin: 20px 0; }
         .box { width: 100px; height: 100px; border: 2px solid #f87171; border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.2rem; background: #1e293b; }
         .num-pad { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; max-width: 600px; margin: 20px auto; }
         .num-btn { padding: 20px; background: #1e293b; border: 1px solid #f87171; color: white; cursor: pointer; border-radius: 10px; }
-        #timer { font-size: 1.5rem; color: #38bdf8; margin: 10px; }
     </style>
 </head>
 <body>
-
     <div id="splash-screen"></div>
-
     <h1>Bowling Time!</h1>
-    <div id="timer">Time: 30s</div>
-    
     <div class="score-container">
         <div class="box">AI BOT<div id="aiScore">?</div></div>
         <div class="box">TARGET<div id="targetDisplay">---</div></div>
         <div class="box">YOU<div id="userScore">?</div></div>
     </div>
-    
     <div style="font-size: 3rem;" id="aiTotalScore">0</div>
-
     <div class="num-pad" id="buttonsContainer"></div>
 
     <script>
-        // ഇവിടെ ടാർഗറ്റ് തുടക്കത്തിൽ '---' ആയിരിക്കും
-        let aiTotal = 0, timeLeft = 30;
-
-        let timerInterval = setInterval(() => {
-            timeLeft--;
-            document.getElementById('timer').innerText = "Time: " + timeLeft + "s";
-            if(timeLeft <= 0) {
-                clearInterval(timerInterval);
-                showSplash("FOUL!");
-                setTimeout(() => window.location.href = 'menu.html', 1500);
-            }
-        }, 1000);
-
-        function showSplash(text) {
-            const s = document.getElementById('splash-screen');
-            s.innerText = text; s.style.display = 'flex'; s.className = 'splash-anim';
-            setTimeout(() => { s.style.display = 'none'; }, 1500);
-        }
-
+        let aiTotal = 0;
         const container = document.getElementById('buttonsContainer');
+        
         for(let i=0; i<=10; i++) {
             let btn = document.createElement('button');
             btn.className = 'num-btn'; btn.innerText = i;
-            btn.onclick = () => { timeLeft = 30; play(i); };
+            btn.onclick = () => play(i);
             container.appendChild(btn);
         }
 
@@ -69,22 +40,19 @@
             document.getElementById('aiScore').innerText = comp;
 
             if (n === comp) {
-                clearInterval(timerInterval);
                 showSplash("OUT!");
-                // ഇവിടെ ഔട്ട് ആകുമ്പോൾ മാത്രം സ്കോർ ടാർഗറ്റിലേക്ക് സേവ് ആകുന്നു
                 localStorage.setItem('targetScore', aiTotal);
-                document.getElementById('targetDisplay').innerText = aiTotal;
                 setTimeout(() => window.location.href = 'game_batting.html', 1500);
             } else {
                 aiTotal += comp;
                 document.getElementById('aiTotalScore').innerText = aiTotal;
-                // ടാർഗറ്റ് ഉണ്ടെങ്കിൽ മാത്രം ചെക്ക് ചെയ്യുക
-                let currentTarget = localStorage.getItem('targetScore');
-                if (currentTarget && aiTotal > currentTarget) {
-                    showSplash("YOU LOST!");
-                    setTimeout(() => window.location.href = 'menu.html', 1500);
-                }
             }
+        }
+
+        function showSplash(text) {
+            const s = document.getElementById('splash-screen');
+            s.innerText = text; s.style.display = 'flex';
+            setTimeout(() => { s.style.display = 'none'; }, 1500);
         }
     </script>
 </body>
