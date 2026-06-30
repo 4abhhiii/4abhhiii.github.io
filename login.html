@@ -5,7 +5,7 @@
     <title>Login - Hand Cricket</title>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAwU8tbkZ-HPXkAtE8dwARTQ1O6rzlpCZ0",
@@ -20,17 +20,21 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
+        // ലോഗിൻ ബട്ടൺ ക്ലിക്ക് ചെയ്യുമ്പോൾ
         document.getElementById('loginBtn').addEventListener('click', () => {
-            signInWithPopup(auth, provider)
-            .then((result) => {
-                const user = result.user;
-                localStorage.setItem('username', user.displayName);
-                window.location.replace('nickname.html');
-            })
-            .catch((error) => {
+            signInWithPopup(auth, provider).catch((error) => {
                 alert("Login Error: " + error.message);
                 console.error(error);
             });
+        });
+
+        // ഓതന്റിക്കേഷൻ സ്റ്റേറ്റ് നിരീക്ഷിക്കുന്നു
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // ലോഗിൻ വിജയിച്ചാൽ നിക്ക് നെയിം പേജിലേക്ക് മാറ്റുന്നു
+                localStorage.setItem('username', user.displayName);
+                window.location.replace('nickname.html');
+            }
         });
     </script>
     <style>
