@@ -10,11 +10,11 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
 
         html { scroll-behavior: smooth; }
-        body { 
-            background-color: #000000; 
-            color: #ffffff; 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
             padding: 20px;
         }
 
@@ -47,14 +47,31 @@
             box-sizing: border-box;
         }
 
-        .wave-text { animation: wave 4s infinite ease-in-out; }
-        @keyframes wave {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        /* --- Sliced Title Styles --- */
+        .slice-container {
+            position: relative;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #dc2626;
+            height: 2.5rem; /* Ensures space for text */
+            display: flex;
+            justify-content: center;
         }
 
-        h1 { color: #dc2626; font-size: 2rem; margin: 0; }
-        .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 5px 0; font-weight: 700; }
+        .slice-container h1 {
+            margin: 0;
+            font-size: 2rem;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slice-container .top { clip-path: inset(0 0 50% 0); }
+        .slice-container .bottom { position: absolute; top: 0; clip-path: inset(50% 0 0 0); }
+
+        .slice-container.active .top { transform: translateY(-10px); }
+        .slice-container.active .bottom { transform: translateY(10px); }
+        /* --------------------------- */
+
+        .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 15px 0 5px 0; font-weight: 700; }
         p { color: #e4e4e7; font-size: 0.85rem; margin-bottom: 0; }
 
         .btn {
@@ -82,13 +99,12 @@
         .about-section h2 { color: #dc2626; font-size: 1.8rem; margin-bottom: 40px; border-left: 4px solid #dc2626; padding-left: 15px; }
         .about-section p { margin-bottom: 40px; font-size: 1.1rem; color: #ffffff; line-height: 1.8; }
 
-        /* Social Footer Styles */
         .social-footer { text-align: center; padding: 40px 0; margin-top: 40px; }
         .social-links { display: flex; justify-content: center; gap: 20px; }
-        .social-icon { 
-            color: #ffffff; 
-            font-size: 24px; 
-            transition: 0.3s; 
+        .social-icon {
+            color: #ffffff;
+            font-size: 24px;
+            transition: 0.3s;
             text-decoration: none;
             padding: 10px;
             border: 1px solid #333;
@@ -108,11 +124,13 @@
         <div class="profile-card">
             <img src="profile.jpg" alt="Abinavom Reji" class="profile-img">
             <div class="content-area">
-                <div class="wave-text">
-                    <h1>Abinavom Reji</h1>
-                    <div class="sub-heading">Student & Creator</div>
-                    <p>Building digital experiences through code.</p>
+                <!-- Sliced Title -->
+                <div class="slice-container">
+                    <h1 class="top">Abinavom Reji</h1>
+                    <h1 class="bottom">Abinavom Reji</h1>
                 </div>
+                <div class="sub-heading">Student & Creator</div>
+                <p>Building digital experiences through code.</p>
             </div>
         </div>
         <a href="#about" class="btn">View Portfolio</a>
@@ -120,25 +138,23 @@
 
     <section id="about" class="about-section">
         <h2>About My Journey</h2>
-        <p>Hi, I am Abinavom Reji. Currently navigating the world of Computer Science as a Plus Two student, I thrive on solving technical challenges and creating engaging digital content. I view every line of code as an opportunity to build something new, and my passion for technology is the driving force behind everything I do.</p>
-        <p>My interest isn't just limited to textbooks; I spend my time exploring advanced tech workflows, sharpening my programming skills, and finding efficient ways to build projects directly from my smartphone. This "mobile-first" approach has taught me how to be resourceful, creative, and highly adaptable, proving that you don't need a heavy desktop setup to innovate.</p>
-        <p>Looking ahead, my roadmap is clear: I am dedicated to pursuing a BSc in Computer Science. This next chapter will be focused on mastering core software development, deep-diving into complex algorithms, and transitioning from a curious learner to a professional developer. I am eager to apply academic theory to real-world problems and contribute to meaningful digital projects.</p>
-        <p>Whether I am editing high-impact short-form videos to capture an audience's attention or debugging code to make a project run smoother, I am always pushing to improve my craft. Welcome to my digital portfolio—a space where I document my growth, share my projects, and outline the future ambitions that keep me inspired every single day.</p>
+        <p>Hi, I am Abinavom Reji. Currently navigating the world of Computer Science as a Plus Two student, I thrive on solving technical challenges and creating engaging digital content...</p>
         <a href="login.html" class="btn btn-large">Play Hand Cricket</a>
     </section>
 
-    <!-- Social Media Footer -->
     <footer class="social-footer">
         <div class="social-links">
-            <a href="https://www.instagram.com/_.4abhhiii._" target="_blank" class="social-icon">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/share/1CbA4hZ7dQ/" target="_blank" class="social-icon">
-                <i class="fab fa-facebook-f"></i>
-            </a>
+            <a href="https://www.instagram.com/_.4abhhiii._" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1CbA4hZ7dQ/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
         </div>
         <p style="color: #666; font-size: 0.8rem; margin-top: 20px;">© 2026 Abinavom Reji</p>
     </footer>
 
+    <script>
+        // Trigger the slice animation after 500ms
+        setTimeout(() => {
+            document.querySelector('.slice-container').classList.add('active');
+        }, 500);
+    </script>
 </body>
 </html>
