@@ -10,33 +10,7 @@
 
         /* --- Animations --- */
 
-        /* 1. The Blade Scratch Effect (Thin, fast flash) */
-        .blade-scratch {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            clip-path: polygon(60% 0, 62% 0, 38% 100%, 36% 100%);
-            animation: scratch-move 0.8s ease-out forwards;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        @keyframes scratch-move {
-            0% { transform: translateY(-50%) translateX(50%); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(50%) translateX(-50%); opacity: 0; }
-        }
-
-        /* 2. Impact Shake */
-        .impact-shake { animation: shake-impact 0.5s ease-out; }
-        @keyframes shake-impact {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(-6px, 3px); }
-            50% { transform: translate(6px, -3px); }
-            75% { transform: translate(-3px, 2px); }
-        }
-
-        /* 3. Continuous Wave */
+        /* Continuous Wave */
         .wave-group-continuous { animation: wave-loop 3s infinite ease-in-out; }
         @keyframes wave-loop {
             0%, 100% { transform: translateY(0); }
@@ -50,10 +24,10 @@
         .profile-card { position: relative; width: 100%; max-width: 450px; border-radius: 24px; overflow: hidden; border: 1px solid #333; }
         .profile-img { width: 100%; height: 550px; object-fit: cover; display: block; }
 
-        .content-area { 
+        .content-area {
             position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 100%; padding: 40px 20px 25px 20px; text-align: center; 
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 60%, transparent); 
+            width: 100%; padding: 40px 20px 25px 20px; text-align: center;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 60%, transparent);
             box-sizing: border-box;
         }
 
@@ -61,7 +35,7 @@
         h1 { color: #dc2626; font-size: 2.2rem; margin: 0; font-weight: 700; }
         .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 10px 0 6px 0; font-weight: 700; }
         p { color: #e4e4e7; font-size: 0.85rem; margin: 0; }
-        
+
         .btn { display: inline-block; padding: 14px 40px; border: 1px solid #dc2626; border-radius: 50px; color: #ffffff; text-decoration: none; transition: 0.4s; background: rgba(220, 38, 38, 0.1); }
         .btn:hover { background: #dc2626; }
         .btn-large { display: block; width: 100%; margin-top: 20px; text-align: center; }
@@ -79,11 +53,8 @@
         <div class="profile-card">
             <img src="profile.jpg" alt="Abinavom Reji" class="profile-img">
             <div class="content-area">
-                <!-- Blade Scratch -->
-                <div id="scratch" class="blade-scratch"></div>
-                
-                <!-- Text Block -->
-                <div id="message-block" class="message-block-container impact-shake">
+                <!-- Text Block with Wave Animation -->
+                <div id="message-block" class="message-block-container wave-group-continuous">
                     <h1>Abinavom Reji</h1>
                     <div class="sub-heading">Student & Creator</div>
                     <p>Building digital experiences through code.</p>
@@ -102,17 +73,5 @@
     <footer class="social-footer">
         <a href="https://www.instagram.com/_.4abhhiii._" class="social-icon"><i class="fab fa-instagram"></i></a>
     </footer>
-
-    <script>
-        const scratch = document.getElementById('scratch');
-        const block = document.getElementById('message-block');
-
-        // Clean up scratch and start wave after animation
-        setTimeout(() => {
-            if(scratch) scratch.remove();
-            block.classList.remove('impact-shake');
-            block.classList.add('wave-group-continuous');
-        }, 800);
-    </script>
 </body>
 </html>
