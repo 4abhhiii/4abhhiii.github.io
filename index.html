@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abinavom Reji | Student Portfolio</title>
+    <title>Abinavom Reji | Portfolio</title>
     <style>
+        html { scroll-behavior: smooth; }
         body {
             background-color: #0f172a;
             color: #f8fafc;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+        section {
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+            padding: 40px;
         }
+
+        /* Hero Section */
         .profile-card {
             background-color: #1e293b;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             text-align: center;
-            max-width: 350px;
+            max-width: 400px;
             width: 100%;
         }
         .profile-img {
@@ -33,43 +39,54 @@
             border: 4px solid #38bdf8;
             margin-bottom: 20px;
         }
-        h1 {
-            margin: 10px 0 5px 0;
-            font-size: 1.8rem;
+        h1 { color: #38bdf8; font-size: 2.2rem; margin: 10px 0; }
+
+        /* About Section */
+        .about-section {
+            background: rgba(30, 41, 59, 0.5);
+            max-width: 800px;
+            text-align: center;
+        }
+        .about-section h2 { color: #00fff5; font-size: 2.5rem; margin-bottom: 20px; }
+        .about-section p { font-size: 1.2rem; color: #cbd5e1; max-width: 600px; margin: 15px auto; }
+
+        .btn {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 12px 25px;
+            border: 2px solid #38bdf8;
+            border-radius: 10px;
             color: #38bdf8;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
         }
-        .subtitle {
-            color: #94a3b8;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .bio {
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
+        .btn:hover { background: #38bdf8; color: #0f172a; }
     </style>
 </head>
 <body>
 
-    <div class="profile-card">
-        <img src="profile.jpg" alt="Tick's Profile Photo" class="profile-img">
-        
-        <h1>Abinavom Reji</h1>
-        <div class="subtitle">Student & Creator</div>
-        
-        <p class="bio">
-            Welcome to my space! I am a student passionate about building things with code, editing short-form video content, and exploring technology straight from my device.
-        </p>
-    </div>
-    <p style="text-align: center; margin-top: 30px;">
-    <a href="about.html" style="display: inline-block; padding: 12px 20px; border: 2px solid #38bdf8; border-radius: 10px; color: #38bdf8; font-weight: bold; text-decoration: none; margin: 10px;">Click here to know about me</a>
-    <br>
-    <a href="login.html" style="display: inline-block; padding: 12px 20px; border: 2px solid #38bdf8; border-radius: 10px; color: #38bdf8; font-weight: bold; text-decoration: none; margin: 10px;">Play Hand Cricket</a>
+    <!-- Hero Section -->
+    <section id="home">
+        <div class="profile-card">
+            <img src="profile.jpg" alt="Tick's Profile Photo" class="profile-img">
+            <h1>Abinavom Reji</h1>
+            <div style="color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Student & Creator</div>
+            <p>Passionate about coding, video editing, and digital innovation.</p>
+            <a href="#about" class="btn">Learn More</a>
+        </div>
+    </section>
 
-</p>
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <h2>About My Journey</h2>
+        <p>Hi, I am Abinavom Reji. Currently navigating the world of Computer Science as a Plus Two student, I thrive on solving technical challenges and creating engaging digital content.</p>
+        <p>My interest isn't just limited to textbooks; I spend my time exploring advanced tech workflows, sharpening my programming skills, and finding efficient ways to build projects directly from my smartphone.</p>
+        <p>Looking ahead, my roadmap is clear: I am dedicated to pursuing a BSc in Computer Science. This next chapter will be focused on mastering core software development, deep-diving into algorithms, and transitioning from a curious learner to a professional developer.</p>
+        <p>Whether I am editing high-impact short-form videos or debugging code, I am always pushing to improve my craft. Welcome to my digital portfolio—a space where I document my growth, projects, and future ambitions.</p>
+        
+        <a href="login.html" class="btn">Play Hand Cricket</a>
+    </section>
 
 </body>
 </html>
