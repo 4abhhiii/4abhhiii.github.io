@@ -4,47 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abinavom Reji | Portfolio</title>
+    <!-- FontAwesome for Social Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
 
         /* --- Animations --- */
         
-        /* 1. Diagonal Slice (One-time) */
-        .slice-animation {
-            animation: slice-move 1.5s ease-out forwards;
-            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 55%);
-            color: #dc2626;
+        /* Shaking effect on the name during the slash line pass */
+        .name-shake {
+            animation: text-shake 0.4s ease-in-out 0.3s; /* Delays slightly to match slash line timing */
         }
 
-        /* 2. Wave Continuous (Looping) */
-        .wave-continuous {
-            animation: wave-loop 3s infinite ease-in-out;
-            color: #dc2626;
+        @keyframes text-shake {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(-4px, 2px); }
+            40% { transform: translate(4px, -2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(3px, 1px); }
         }
 
-        @keyframes slice-move {
-            0% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 55%); opacity: 0; transform: translateY(20px); }
-            50% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 55%); opacity: 1; transform: translateY(0); }
-            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: 1; transform: translateY(0); }
+        /* Diagonal Slash Line Effect (Top-Right to Bottom-Left) */
+        .slash-line-element {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
         }
 
-        @keyframes wave-loop {
+        .slash-line-element::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 200%;
+            background: #dc2626;
+            /* Precise top-right to bottom-left angle */
+            transform: rotate(35deg); 
+            top: -120%;
+            left: 150%;
+            animation: diagonal-slash-pass 1.2s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
+        }
+
+        @keyframes diagonal-slash-pass {
+            0% { top: -120%; left: 150%; }
+            100% { top: 40%; left: -100%; }
+        }
+
+        /* Continuous Wave Loop for the entire group */
+        .wave-group-continuous {
+            animation: complete-wave 3s infinite ease-in-out;
+        }
+
+        @keyframes complete-wave {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-8px); }
         }
 
         /* --- Layout Styles --- */
         html { scroll-behavior: smooth; }
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }
         .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; }
-        .profile-card { position: relative; width: 100%; max-width: 450px; border-radius: 24px; overflow: hidden; border: 1px solid #333; }
+        
+        .profile-card { 
+            position: relative; 
+            width: 100%; 
+            max-width: 450px; 
+            border-radius: 24px; 
+            overflow: hidden; 
+            border: 1px solid #333; 
+        }
+        
         .profile-img { width: 100%; height: 550px; object-fit: cover; display: block; }
-        .content-area { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px 20px 20px 20px; text-align: center; background: linear-gradient(to top, rgba(0,0,0,0.9) 70%, transparent); }
         
-        h1 { font-size: 2.2rem; margin: 0; transition: all 0.5s ease; }
-        .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 10px 0; font-weight: 700; }
+        /* Perfectly centers text container horizontally and locks it to the bottom center of picture */
+        .content-area { 
+            position: absolute; 
+            bottom: 0; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%; 
+            padding: 40px 20px 25px 20px; 
+            text-align: center; 
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 60%, transparent); 
+            box-sizing: border-box; 
+        }
         
+        /* Keeps layout completely uniform and centered inside the message block */
+        .message-block-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        h1 { color: #dc2626; font-size: 2.2rem; margin: 0; font-weight: 700; position: relative; }
+        .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 10px 0 6px 0; font-weight: 700; }
+        p { color: #e4e4e7; font-size: 0.85rem; margin: 0; }
+
         .btn { display: inline-block; padding: 14px 40px; border: 1px solid #dc2626; border-radius: 50px; color: #ffffff; text-decoration: none; transition: 0.4s; background: rgba(220, 38, 38, 0.1); }
         .btn:hover { background: #dc2626; color: #ffffff; }
         .btn-large { display: block; width: 100%; box-sizing: border-box; text-align: center; }
@@ -65,8 +127,16 @@
         <div class="profile-card">
             <img src="profile.jpg" alt="Abinavom Reji" class="profile-img">
             <div class="content-area">
-                <h1 id="name-title" class="slice-animation">Abinavom Reji</h1>
-                <div class="sub-heading">Student & Creator</div>
+                <!-- Wrapper for the entire block -->
+                <div id="full-message-block" class="message-block-container">
+                    <!-- The line element that delivers the slash overlay -->
+                    <div id="slash-line" class="slash-line-element"></div>
+                    
+                    <!-- Text elements remain clear and readable from second zero -->
+                    <h1 id="name-title" class="name-shake">Abinavom Reji</h1>
+                    <div class="sub-heading">Student & Creator</div>
+                    <p>Building digital experiences through code.</p>
+                </div>
             </div>
         </div>
         <a href="#about" class="btn">View Portfolio</a>
@@ -90,11 +160,20 @@
     </footer>
 
     <script>
+        // Once the 1.5s intro slice/shake completes, clean up and transition to full wave loop
         setTimeout(() => {
-            const title = document.getElementById('name-title');
-            title.classList.remove('slice-animation');
-            title.classList.add('wave-continuous');
-            title.style.clipPath = "none";
+            const slashElement = document.getElementById('slash-line');
+            const nameElement = document.getElementById('name-title');
+            const fullBlockElement = document.getElementById('full-message-block');
+            
+            // 1. Remove slash visual trace completely
+            if(slashElement) slashElement.remove();
+            
+            // 2. Clear out the single-run shake animation class from name
+            nameElement.classList.remove('name-shake');
+            
+            // 3. Initiate continuous vertical wave animation across entire group smoothly
+            fullBlockElement.classList.add('wave-group-continuous');
         }, 1500);
     </script>
 
