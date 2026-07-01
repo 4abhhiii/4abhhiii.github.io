@@ -4,47 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abinavom Reji | Portfolio</title>
+    <!-- FontAwesome for Social Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
 
-        /* --- Animations --- */
-
-        /* Continuous Wave */
-        .wave-group-continuous { animation: wave-loop 3s infinite ease-in-out; }
-        @keyframes wave-loop {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: #000000; 
+            color: #ffffff; 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 20px;
         }
 
-        /* --- Layout Styles --- */
-        html { scroll-behavior: smooth; }
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }
         .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; }
-        .profile-card { position: relative; width: 100%; max-width: 450px; border-radius: 24px; overflow: hidden; border: 1px solid #333; }
-        .profile-img { width: 100%; height: 550px; object-fit: cover; display: block; }
+
+        .profile-card {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 550px;
+            object-fit: cover;
+            display: block;
+        }
 
         .content-area {
-            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 100%; padding: 40px 20px 25px 20px; text-align: center;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 60%, transparent);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 20px 20px 20px;
+            text-align: center;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 70%, transparent);
             box-sizing: border-box;
         }
 
-        .message-block-container { position: relative; width: 100%; }
-        h1 { color: #dc2626; font-size: 2.2rem; margin: 0; font-weight: 700; }
-        .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 10px 0 6px 0; font-weight: 700; }
-        p { color: #e4e4e7; font-size: 0.85rem; margin: 0; }
+        .wave-text { animation: wave 4s infinite ease-in-out; }
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
 
-        .btn { display: inline-block; padding: 14px 40px; border: 1px solid #dc2626; border-radius: 50px; color: #ffffff; text-decoration: none; transition: 0.4s; background: rgba(220, 38, 38, 0.1); }
-        .btn:hover { background: #dc2626; }
-        .btn-large { display: block; width: 100%; margin-top: 20px; text-align: center; }
+        h1 { color: #dc2626; font-size: 2rem; margin: 0; }
+        .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 5px 0; font-weight: 700; }
+        p { color: #e4e4e7; font-size: 0.85rem; margin-bottom: 0; }
 
-        .about-section { max-width: 700px; margin: 80px auto; text-align: left; padding: 40px; background: #0a0a0a; border-radius: 20px; border: 1px solid #222; }
+        .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            border: 1px solid #dc2626;
+            border-radius: 50px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: 0.4s;
+            background: rgba(220, 38, 38, 0.1);
+        }
+        .btn:hover { background: #dc2626; color: #ffffff; }
+        .btn-large { display: block; width: 100%; box-sizing: border-box; text-align: center; }
+
+        .about-section {
+            max-width: 700px;
+            margin: 80px auto;
+            text-align: left;
+            padding: 40px;
+            background: #0a0a0a;
+            border-radius: 20px;
+            border: 1px solid #222;
+        }
         .about-section h2 { color: #dc2626; font-size: 1.8rem; margin-bottom: 40px; border-left: 4px solid #dc2626; padding-left: 15px; }
-        .about-section p { margin-bottom: 40px; font-size: 1.1rem; line-height: 1.8; }
-        .social-footer { text-align: center; padding: 40px 0; }
-        .social-icon { color: #ffffff; padding: 10px; border: 1px solid #333; border-radius: 50%; width: 50px; height: 50px; display: inline-flex; align-items: center; justify-content: center; }
+        .about-section p { margin-bottom: 40px; font-size: 1.1rem; color: #ffffff; line-height: 1.8; }
+
+        /* Social Footer Styles */
+        .social-footer { text-align: center; padding: 40px 0; margin-top: 40px; }
+        .social-links { display: flex; justify-content: center; gap: 20px; }
+        .social-icon { 
+            color: #ffffff; 
+            font-size: 24px; 
+            transition: 0.3s; 
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .social-icon:hover { color: #dc2626; border-color: #dc2626; }
     </style>
 </head>
 <body>
@@ -53,8 +108,7 @@
         <div class="profile-card">
             <img src="profile.jpg" alt="Abinavom Reji" class="profile-img">
             <div class="content-area">
-                <!-- Text Block with Wave Animation -->
-                <div id="message-block" class="message-block-container wave-group-continuous">
+                <div class="wave-text">
                     <h1>Abinavom Reji</h1>
                     <div class="sub-heading">Student & Creator</div>
                     <p>Building digital experiences through code.</p>
@@ -66,12 +120,25 @@
 
     <section id="about" class="about-section">
         <h2>About My Journey</h2>
-        <p>I am Abinavom Reji. Currently navigating Computer Science as a Plus Two student, thriving on technical challenges and creating digital content.</p>
+        <p>Hi, I am Abinavom Reji. Currently navigating the world of Computer Science as a Plus Two student, I thrive on solving technical challenges and creating engaging digital content. I view every line of code as an opportunity to build something new, and my passion for technology is the driving force behind everything I do.</p>
+        <p>My interest isn't just limited to textbooks; I spend my time exploring advanced tech workflows, sharpening my programming skills, and finding efficient ways to build projects directly from my smartphone. This "mobile-first" approach has taught me how to be resourceful, creative, and highly adaptable, proving that you don't need a heavy desktop setup to innovate.</p>
+        <p>Looking ahead, my roadmap is clear: I am dedicated to pursuing a BSc in Computer Science. This next chapter will be focused on mastering core software development, deep-diving into complex algorithms, and transitioning from a curious learner to a professional developer. I am eager to apply academic theory to real-world problems and contribute to meaningful digital projects.</p>
+        <p>Whether I am editing high-impact short-form videos to capture an audience's attention or debugging code to make a project run smoother, I am always pushing to improve my craft. Welcome to my digital portfolio—a space where I document my growth, share my projects, and outline the future ambitions that keep me inspired every single day.</p>
         <a href="login.html" class="btn btn-large">Play Hand Cricket</a>
     </section>
 
+    <!-- Social Media Footer -->
     <footer class="social-footer">
-        <a href="https://www.instagram.com/_.4abhhiii._" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <div class="social-links">
+            <a href="https://www.instagram.com/_.4abhhiii._" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/share/1CbA4hZ7dQ/" target="_blank" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
+        <p style="color: #666; font-size: 0.8rem; margin-top: 20px;">© 2026 Abinavom Reji</p>
     </footer>
+
 </body>
 </html>
