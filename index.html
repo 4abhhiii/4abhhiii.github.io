@@ -9,96 +9,53 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
 
-        html { scroll-behavior: smooth; }
-        body { 
-            background-color: #000000; 
-            color: #ffffff; 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            padding: 20px;
+        /* --- Animations --- */
+        .electric-slice {
+            animation: electric-glow 1.5s ease-out forwards;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 55%);
+            background: linear-gradient(to bottom, #dc2626 50%, #ffffff 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; }
-
-        .profile-card {
-            position: relative;
-            width: 100%;
-            max-width: 450px;
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid #333;
+        .wave-continuous {
+            animation: wave-loop 3s infinite ease-in-out;
+            color: #dc2626;
         }
 
-        .profile-img {
-            width: 100%;
-            height: 550px;
-            object-fit: cover;
-            display: block;
+        @keyframes electric-glow {
+            0% { filter: drop-shadow(0 0 5px #dc2626) drop-shadow(0 0 10px #dc2626); }
+            50% { filter: drop-shadow(0 0 20px #dc2626); }
+            100% { filter: drop-shadow(0 0 2px #dc2626); }
         }
 
-        .content-area {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 30px 20px 20px 20px;
-            text-align: center;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 70%, transparent);
-            box-sizing: border-box;
-        }
-
-        .wave-text { animation: wave 4s infinite ease-in-out; }
-        @keyframes wave {
+        @keyframes wave-loop {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
         }
 
-        h1 { color: #dc2626; font-size: 2rem; margin: 0; }
-        .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 5px 0; font-weight: 700; }
-        p { color: #e4e4e7; font-size: 0.85rem; margin-bottom: 0; }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 40px;
-            border: 1px solid #dc2626;
-            border-radius: 50px;
-            color: #ffffff;
-            text-decoration: none;
-            transition: 0.4s;
-            background: rgba(220, 38, 38, 0.1);
-        }
+        /* --- Layout Styles --- */
+        html { scroll-behavior: smooth; }
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; }
+        .profile-card { position: relative; width: 100%; max-width: 450px; border-radius: 24px; overflow: hidden; border: 1px solid #333; }
+        .profile-img { width: 100%; height: 550px; object-fit: cover; display: block; }
+        .content-area { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px 20px 20px 20px; text-align: center; background: linear-gradient(to top, rgba(0,0,0,0.9) 70%, transparent); }
+        
+        h1 { font-size: 2.2rem; margin: 0; transition: all 0.5s ease; }
+        .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 10px 0; font-weight: 700; }
+        
+        .btn { display: inline-block; padding: 14px 40px; border: 1px solid #dc2626; border-radius: 50px; color: #ffffff; text-decoration: none; transition: 0.4s; background: rgba(220, 38, 38, 0.1); }
         .btn:hover { background: #dc2626; color: #ffffff; }
         .btn-large { display: block; width: 100%; box-sizing: border-box; text-align: center; }
 
-        .about-section {
-            max-width: 700px;
-            margin: 80px auto;
-            text-align: left;
-            padding: 40px;
-            background: #0a0a0a;
-            border-radius: 20px;
-            border: 1px solid #222;
-        }
+        .about-section { max-width: 700px; margin: 80px auto; text-align: left; padding: 40px; background: #0a0a0a; border-radius: 20px; border: 1px solid #222; }
         .about-section h2 { color: #dc2626; font-size: 1.8rem; margin-bottom: 40px; border-left: 4px solid #dc2626; padding-left: 15px; }
         .about-section p { margin-bottom: 40px; font-size: 1.1rem; color: #ffffff; line-height: 1.8; }
 
-        /* Social Footer Styles */
         .social-footer { text-align: center; padding: 40px 0; margin-top: 40px; }
         .social-links { display: flex; justify-content: center; gap: 20px; }
-        .social-icon { 
-            color: #ffffff; 
-            font-size: 24px; 
-            transition: 0.3s; 
-            text-decoration: none;
-            padding: 10px;
-            border: 1px solid #333;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .social-icon { color: #ffffff; font-size: 24px; transition: 0.3s; text-decoration: none; padding: 10px; border: 1px solid #333; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
         .social-icon:hover { color: #dc2626; border-color: #dc2626; }
     </style>
 </head>
@@ -108,11 +65,8 @@
         <div class="profile-card">
             <img src="profile.jpg" alt="Abinavom Reji" class="profile-img">
             <div class="content-area">
-                <div class="wave-text">
-                    <h1>Abinavom Reji</h1>
-                    <div class="sub-heading">Student & Creator</div>
-                    <p>Building digital experiences through code.</p>
-                </div>
+                <h1 id="name-title" class="electric-slice">Abinavom Reji</h1>
+                <div class="sub-heading">Student & Creator</div>
             </div>
         </div>
         <a href="#about" class="btn">View Portfolio</a>
@@ -127,18 +81,23 @@
         <a href="login.html" class="btn btn-large">Play Hand Cricket</a>
     </section>
 
-    <!-- Social Media Footer -->
     <footer class="social-footer">
         <div class="social-links">
-            <a href="https://www.instagram.com/_.4abhhiii._" target="_blank" class="social-icon">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/share/1CbA4hZ7dQ/" target="_blank" class="social-icon">
-                <i class="fab fa-facebook-f"></i>
-            </a>
+            <a href="https://www.instagram.com/_.4abhhiii._" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1CbA4hZ7dQ/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
         </div>
         <p style="color: #666; font-size: 0.8rem; margin-top: 20px;">© 2026 Abinavom Reji</p>
     </footer>
+
+    <script>
+        setTimeout(() => {
+            const title = document.getElementById('name-title');
+            title.classList.remove('electric-slice');
+            title.classList.add('wave-continuous');
+            title.style.clipPath = "none";
+            title.style.webkitTextFillColor = "#dc2626";
+        }, 1500);
+    </script>
 
 </body>
 </html>
