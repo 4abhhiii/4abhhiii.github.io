@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abinavom Reji | Portfolio</title>
-    <!-- FontAwesome for Social Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
 
         /* --- Animations --- */
-        .electric-slice {
-            animation: electric-glow 1.5s ease-out forwards;
+        
+        /* 1. Diagonal Slice (One-time) */
+        .slice-animation {
+            animation: slice-move 1.5s ease-out forwards;
             clip-path: polygon(0 0, 100% 0, 100% 45%, 0 55%);
-            background: linear-gradient(to bottom, #dc2626 50%, #ffffff 50%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #dc2626;
         }
 
+        /* 2. Wave Continuous (Looping) */
         .wave-continuous {
             animation: wave-loop 3s infinite ease-in-out;
             color: #dc2626;
         }
 
-        @keyframes electric-glow {
-            0% { filter: drop-shadow(0 0 5px #dc2626) drop-shadow(0 0 10px #dc2626); }
-            50% { filter: drop-shadow(0 0 20px #dc2626); }
-            100% { filter: drop-shadow(0 0 2px #dc2626); }
+        @keyframes slice-move {
+            0% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 55%); opacity: 0; transform: translateY(20px); }
+            50% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 55%); opacity: 1; transform: translateY(0); }
+            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: 1; transform: translateY(0); }
         }
 
         @keyframes wave-loop {
@@ -65,7 +65,7 @@
         <div class="profile-card">
             <img src="profile.jpg" alt="Abinavom Reji" class="profile-img">
             <div class="content-area">
-                <h1 id="name-title" class="electric-slice">Abinavom Reji</h1>
+                <h1 id="name-title" class="slice-animation">Abinavom Reji</h1>
                 <div class="sub-heading">Student & Creator</div>
             </div>
         </div>
@@ -92,10 +92,9 @@
     <script>
         setTimeout(() => {
             const title = document.getElementById('name-title');
-            title.classList.remove('electric-slice');
+            title.classList.remove('slice-animation');
             title.classList.add('wave-continuous');
             title.style.clipPath = "none";
-            title.style.webkitTextFillColor = "#dc2626";
         }, 1500);
     </script>
 
