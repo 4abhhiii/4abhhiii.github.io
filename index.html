@@ -5,25 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abinavom Reji | Portfolio</title>
     <style>
+        html { scroll-behavior: smooth; }
         body {
             background-color: #000000;
             color: #f8fafc;
             font-family: 'Segoe UI', system-ui, sans-serif;
             margin: 0;
+            padding: 20px;
+        }
+
+        /* Hero Section Styling */
+        .hero {
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
         }
 
         .profile-card {
-            background-color: #111111; /* Slightly lighter than pure black for contrast */
+            background-color: #111111;
             border: 1px solid #333;
             padding: 0;
             border-radius: 20px;
             text-align: center;
             max-width: 400px;
-            width: 90%;
+            width: 100%;
             overflow: hidden;
         }
 
@@ -31,25 +37,27 @@
             width: 100%;
             height: 300px;
             object-fit: cover;
-            /* Removed border-radius and border to fill the square space */
+            object-position: center;
+            display: block;
         }
 
-        .content-area {
-            padding: 30px;
-        }
-
+        .content-area { padding: 30px; }
         h1 { color: #38bdf8; font-size: 2rem; margin: 10px 0; }
+        .sub-heading { color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 15px; }
 
-        .sub-heading { 
-            color: #94a3b8; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            font-size: 0.9rem;
-            margin-bottom: 15px;
+        /* About Section Styling */
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            text-align: center;
+            padding: 40px;
+            background: #111111;
+            border-radius: 20px;
         }
+        .about-section h2 { color: #00fff5; font-size: 2.2rem; margin-bottom: 20px; }
+        .about-section p { color: #cbd5e1; margin-bottom: 20px; font-size: 1.1rem; }
 
-        p { color: #cbd5e1; margin-bottom: 25px; }
-
+        /* Button Styling */
         .btn {
             display: inline-block;
             padding: 12px 40px;
@@ -65,16 +73,27 @@
 </head>
 <body>
 
-    <div class="profile-card">
-        <img src="profile.jpg" alt="Abinavom Reji" class="profile-img">
-        
-        <div class="content-area">
-            <h1>Abinavom Reji</h1>
-            <div class="sub-heading">Student & Creator</div>
-            <p>Passionate about coding, video editing, and digital innovation.</p>
-            <a href="#about" class="btn">Learn More</a>
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div class="profile-card">
+            <img src="profile.jpg" alt="Abinavom Reji" class="profile-img">
+            <div class="content-area">
+                <h1>Abinavom Reji</h1>
+                <div class="sub-heading">Student & Creator</div>
+                <p>Passionate about coding, video editing, and digital innovation.</p>
+                <a href="#about" class="btn">Learn More</a>
+            </div>
         </div>
     </div>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <h2>About My Journey</h2>
+        <p>Hi, I am Abinavom Reji. Currently navigating the world of Computer Science as a Plus Two student, I thrive on solving technical challenges and creating engaging digital content.</p>
+        <p>My interest isn't just limited to textbooks; I spend my time exploring advanced tech workflows, sharpening my programming skills, and finding efficient ways to build projects directly from my smartphone.</p>
+        <p>Whether I am editing high-impact short-form videos or debugging code, I am always pushing to improve my craft.</p>
+        <a href="login.html" class="btn">Play Hand Cricket</a>
+    </section>
 
 </body>
 </html>
