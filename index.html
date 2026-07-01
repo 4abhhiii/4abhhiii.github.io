@@ -47,10 +47,22 @@
             box-sizing: border-box;
         }
 
-        /* --- Added Animation Styles --- */
+        /* --- Animation Styles --- */
+        
+        /* Wave animation starts after slash finishes (3s) */
+        .wave-group {
+            animation: wave 2.5s ease-in-out infinite;
+            animation-delay: 3s; 
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
         .slice-container {
             position: relative;
-            height: 3rem; 
+            height: 3rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -63,30 +75,29 @@
             color: #dc2626;
             font-weight: 700;
             white-space: nowrap;
-            animation: slice-and-wave 8s ease-in-out infinite;
         }
 
-        .top { clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%); }
-        .bottom { clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 100%); }
+        .top { clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%); }
+        .bottom { clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%); }
 
-        @keyframes slice-and-wave {
-            0%, 10% { transform: translate(0, 0); }
-            20%, 40% { transform: translate(10px, -10px); }
-            50%, 60% { transform: translate(0, 0); }
-            70%, 100% { transform: translateY(0); }
+        .top-half { animation: slash-action 3s ease-in-out forwards; }
+        .bottom-half { animation: slash-action-bottom 3s ease-in-out forwards; }
+
+        @keyframes slash-action {
+            0%   { transform: translate(0, 0); }
+            30%  { transform: translate(-10px, -10px); }
+            60%  { transform: translate(0, 0); }
+            100% { transform: translate(0, 0); }
         }
 
-        .wave-group {
-            animation: wave 4s ease-in-out infinite;
-            animation-delay: 6s;
+        @keyframes slash-action-bottom {
+            0%   { transform: translate(0, 0); }
+            30%  { transform: translate(10px, 10px); }
+            60%  { transform: translate(0, 0); }
+            100% { transform: translate(0, 0); }
         }
 
-        @keyframes wave {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        /* --------------------------- */
-
+        /* Standard Styles */
         .sub-heading { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin: 5px 0; font-weight: 700; }
         p { color: #e4e4e7; font-size: 0.85rem; margin-bottom: 0; }
 
@@ -141,12 +152,10 @@
             <img src="profile.jpg" alt="Abinavom Reji" class="profile-img">
             <div class="content-area">
                 <div class="wave-group">
-                    <!-- The Sliced Title -->
                     <div class="slice-container">
-                        <h1 class="slice-layer top">Abinavom Reji</h1>
-                        <h1 class="slice-layer bottom">Abinavom Reji</h1>
+                        <h1 class="slice-layer top top-half">Abinavom Reji</h1>
+                        <h1 class="slice-layer bottom bottom-half">Abinavom Reji</h1>
                     </div>
-                    <!-- Other Text -->
                     <div class="sub-heading">Student & Creator</div>
                     <p>Building digital experiences through code.</p>
                 </div>
